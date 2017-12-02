@@ -8,13 +8,16 @@ import {
 import _ from 'lodash';
 import {sprintf} from 'sprintf-js';
 
-const DEFAULT_BG = '#FAB913';
-const LABEL_COLOR = '#FFF';
-const DIGIT_TXT_COLOR = '#FFF';
+const DEFAULT_BG_COLOR = '#FAB913';
+const DEFAULT_TIME_TXT_COLOR = '#FFF';
+const DEFAULT_DIGIT_TXT_COLOR = '#FFF';
 
 const CountDown = React.createClass({
   propTypes: {
-    timerStyle: PropTypes.object,
+    containerStyle: PropTypes.object,
+    digitBgColor: PropTypes.string,
+    digitTxtColor: PropTypes.string,
+    timeTxtColor: PropTypes.string,
     size: PropTypes.number,
     until: PropTypes.number,
     onFinish: PropTypes.func,
@@ -62,17 +65,17 @@ const CountDown = React.createClass({
   },
 
   renderDigit(d) {
-    const {timerStyle, size} = this.props;
+    const {digitBgColor, digitTxtColor, size} = this.props;
     return (
       <View style={[
         styles.digitCont,
-        {backgroundColor: timerStyle.backgroundColor || DEFAULT_BG},
+        {backgroundColor: digitBgColor},
         {width: size * 2.3, height: size * 2.6},
       ]}>
         <Text style={[
           styles.digitTxt,
           {fontSize: size},
-          {color: timerStyle.digitTxtColor || DIGIT_TXT_COLOR}
+          {color: digitTxtColor}
         ]}>
           {d}
         </Text>
@@ -81,7 +84,7 @@ const CountDown = React.createClass({
   },
 
   renderDoubleDigits(label, digits) {
-    const {timerStyle, size} = this.props;
+    const {timeTxtColor, size} = this.props;
 
     return (
       <View key={label} style={styles.doubleDigitCont}>
@@ -91,7 +94,7 @@ const CountDown = React.createClass({
         <Text style={[
           styles.timeTxt,
           {fontSize: size / 1.8},
-          {color: timerStyle.labelColor || LABEL_COLOR},
+          {color: timeTxtColor},
         ]}>
           {label}
         </Text>
@@ -119,9 +122,10 @@ const CountDown = React.createClass({
   },
 
   render() {
-    const {timerStyle} = this.props;
+    const {containerStyle} = this.props;
+
     return (
-      <View style={timerStyle.container || {}}>
+      <View style={containerStyle}>
         {this.renderCountDown()}
       </View>
     );
@@ -129,9 +133,12 @@ const CountDown = React.createClass({
 });
 
 CountDown.defaultProps = {
-  timerStyle: {},
-  size: 15,
+  containerStyle: {},
+  digitBgColor: DEFAULT_BG_COLOR,
+  digitTxtColor: DEFAULT_DIGIT_TXT_COLOR,
+  timeTxtColor: DEFAULT_TIME_TXT_COLOR,
   until: 0,
+  size: 15,
 };
 
 const styles = StyleSheet.create({
