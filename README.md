@@ -18,3 +18,19 @@ React Native CountDown
 ## Preview
 
 ![React Native Countdown](/GIF/countdown-basic.gif?raw=true "React Native Countdown")
+
+## Code
+```javascript
+import CountDown from 'react-native-countdown';
+
+render() {
+    return (
+      <CountDown
+        until={10}
+        onFinish={() => alert('finished')}
+        onTimerClick={() => alert('hello')}
+        size={20}
+      />
+    )
+}
+```
