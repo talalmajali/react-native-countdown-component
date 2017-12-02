@@ -1,0 +1,29 @@
+{
+  "name": "react-native-countdown",
+  "version": "1.0.0",
+  "description": "React Native CountDown Component",
+  "keywords": [
+    "react-native",
+    "react-component",
+    "react-native-component",
+    "react",
+    "mobile",
+    "ios",
+    "android",
+    "counter",
+    "countdown"
+  ],
+  "author": {
+    "name": "Talal Majali",
+    "email": "t.majali93@gmail.com"
+  },
+  "homepage": "https://github.com/talalmajali/react-native-countdown",
+  "bugs": {
+    "url": "https://github.com/talalmajali/react-native-countdown/issues"
+  },
+  "dependencies": {
+    "lodash": "^4.0.0",
+    "sprintf-js": "^1.1.1",
+    "prop-types": "^15.5.8"
+  }
+}
