@@ -21,7 +21,7 @@ React Native CountDown
 
 ## Code
 ```javascript
-import CountDown from 'react-native-countdown';
+import CountDown from 'react-native-countdown-component';
 
 render() {
     return (
