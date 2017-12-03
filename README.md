@@ -17,7 +17,7 @@ React Native CountDown
 
 ## Preview
 
-![React Native Countdown](/GIF/countdown-basic.gif?raw=true "React Native Countdown")
+![React Native Countdown](https://media.giphy.com/media/xT0xeLWYNSaLerFGko/giphy.gif "React Native Countdown")
 
 ## Code
 ```javascript

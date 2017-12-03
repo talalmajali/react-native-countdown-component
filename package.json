@@ -2,6 +2,10 @@
   "name": "react-native-countdown-component",
   "version": "1.0.0",
   "description": "React Native CountDown Component",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/talalmajali/react-native-countdown-component.git"
+  },
   "keywords": [
     "react-native",
     "react-component",
