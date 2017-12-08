@@ -1,18 +1,20 @@
 # react-native-countdown
 React Native CountDown
 
+## Installation
+Run `npm install react-native-countdown-component --save` OR `yarn add react-native-countdown-component --save`
 
 ## Props
 | Name | Description | Type | Default Value |
 | :--- | :----- | :--- | :---: |
-| containerStyle | Override the component style | object | {} |
+| style | Override the component style | object | {} |
 | digitBgColor |  Digit background color | string | ![#FAB913](https://placehold.it/15/FAB913/000000?text=+) `'#FAB913'` |
-| digitTxtColor | Digit text color | string | ![#000](https://placehold.it/15/000/000000?text=+) `'#000'` |
-| timeTxtColor | Time labels text color | string | ![#000](https://placehold.it/15/000/000000?text=+) `'#000'` |
+| digitTxtColor | Digit text color | string | ![#000000](https://placehold.it/15/000/000000?text=+) `'#000000'` |
+| timeTxtColor | Time labels text color | string | ![#000000](https://placehold.it/15/000/000000?text=+) `'#000000'` |
 | size | Size of the countdown component | number | 15 |
 | until | Number of seconds to countdown | number | 0 |
 | onFinish | What function should be invoked when the time is 0 | func | null |
-| onTimerClick | What function should be invoked when clicking on the timer | func | null |
+| onPress | What function should be invoked when clicking on the timer | func | null |
 
 
 ## Preview
@@ -28,7 +30,7 @@ render() {
       <CountDown
         until={10}
         onFinish={() => alert('finished')}
-        onTimerClick={() => alert('hello')}
+        onPress={() => alert('hello')}
         size={20}
       />
     )
