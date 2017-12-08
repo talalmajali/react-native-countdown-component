@@ -14,7 +14,6 @@ const DEFAULT_DIGIT_TXT_COLOR = '#000';
 
 const CountDown = React.createClass({
   propTypes: {
-    containerStyle: PropTypes.object,
     digitBgColor: PropTypes.string,
     digitTxtColor: PropTypes.string,
     timeTxtColor: PropTypes.string,
@@ -122,10 +121,8 @@ const CountDown = React.createClass({
   },
 
   render() {
-    const {containerStyle} = this.props;
-
     return (
-      <View style={containerStyle}>
+      <View style={this.props.style}>
         {this.renderCountDown()}
       </View>
     );
@@ -133,7 +130,6 @@ const CountDown = React.createClass({
 });
 
 CountDown.defaultProps = {
-  containerStyle: {},
   digitBgColor: DEFAULT_BG_COLOR,
   digitTxtColor: DEFAULT_DIGIT_TXT_COLOR,
   timeTxtColor: DEFAULT_TIME_TXT_COLOR,
