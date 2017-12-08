@@ -20,7 +20,7 @@ const CountDown = React.createClass({
     size: PropTypes.number,
     until: PropTypes.number,
     onFinish: PropTypes.func,
-    onTimerClick: PropTypes.func,
+    onPress: PropTypes.func,
   },
 
   getInitialState() {
@@ -105,12 +105,12 @@ const CountDown = React.createClass({
     const {until} = this.state;
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
-    const Component = this.props.onTimerClick ? TouchableOpacity : View;
+    const Component = this.props.onPress ? TouchableOpacity : View;
 
     return (
       <Component
         style={styles.timeCont}
-        onPress={this.props.onTimerClick}
+        onPress={this.props.onPress}
       >
         {this.renderDoubleDigits('Days', newTime[0])}
         {this.renderDoubleDigits('Hours', newTime[1])}
