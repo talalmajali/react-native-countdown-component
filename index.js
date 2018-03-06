@@ -13,12 +13,14 @@ import {sprintf} from 'sprintf-js';
 const DEFAULT_BG_COLOR = '#FAB913';
 const DEFAULT_TIME_TXT_COLOR = '#000';
 const DEFAULT_DIGIT_TXT_COLOR = '#000';
+const DEFAULT_TIME_TO_SHOW = ['D', 'H', 'M', 'S'];
 
 class CountDown extends React.Component {
   static propTypes = {
     digitBgColor: PropTypes.string,
     digitTxtColor: PropTypes.string,
     timeTxtColor: PropTypes.string,
+    timeToShow: PropTypes.array,
     size: PropTypes.number,
     until: PropTypes.number,
     onFinish: PropTypes.func,
@@ -102,6 +104,7 @@ class CountDown extends React.Component {
   };
 
   renderCountDown = () => {
+    const {timeToShow} = this.props;
     const {until} = this.state;
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
@@ -112,10 +115,10 @@ class CountDown extends React.Component {
         style={styles.timeCont}
         onPress={this.props.onPress}
       >
-        {this.renderDoubleDigits('Days', newTime[0])}
-        {this.renderDoubleDigits('Hours', newTime[1])}
-        {this.renderDoubleDigits('Minutes', newTime[2])}
-        {this.renderDoubleDigits('Seconds', newTime[3])}
+        {_.includes(timeToShow, 'D') ? this.renderDoubleDigits('Days', newTime[0]) : null}
+        {_.includes(timeToShow, 'H') ? this.renderDoubleDigits('Hours', newTime[1]) : null}
+        {_.includes(timeToShow, 'M') ? this.renderDoubleDigits('Minutes', newTime[2]) : null}
+        {_.includes(timeToShow, 'S') ? this.renderDoubleDigits('Seconds', newTime[3]) : null}
       </Component>
     );
   };
@@ -133,6 +136,7 @@ CountDown.defaultProps = {
   digitBgColor: DEFAULT_BG_COLOR,
   digitTxtColor: DEFAULT_DIGIT_TXT_COLOR,
   timeTxtColor: DEFAULT_TIME_TXT_COLOR,
+  timeToShow: DEFAULT_TIME_TO_SHOW,
   until: 0,
   size: 15,
 };
