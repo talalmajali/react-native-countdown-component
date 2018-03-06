@@ -15,6 +15,7 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | until | Number of seconds to countdown | number | 0 |
 | onFinish | What function should be invoked when the time is 0 | func | null |
 | onPress | What function should be invoked when clicking on the timer | func | null |
+| timeToShow | What Digits to show | array | ['D', 'H', 'M', 'S'] |
 
 
 ## Preview
