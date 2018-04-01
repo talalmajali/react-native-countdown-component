@@ -6,6 +6,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  AppState
 } from 'react-native';
 import _ from 'lodash';
 import {sprintf} from 'sprintf-js';
@@ -29,6 +30,7 @@ class CountDown extends React.Component {
 
   state = {
     until: this.props.until,
+    wentBackgroundAt: null,
   };
 
   componentDidMount() {
@@ -36,10 +38,23 @@ class CountDown extends React.Component {
       this.onFinish = _.once(this.props.onFinish);
     }
     this.timer = setInterval(this.updateTimer, 1000);
+    AppState.addEventListener('change', this._handleAppStateChange);
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = currentAppState => {
+    const {until, wentBackgroundAt} = this.state;
+    if (currentAppState === 'active' && wentBackgroundAt) {
+      const diff = (Date.now() - wentBackgroundAt) / 1000.0;
+      this.setState({until: Math.max(0, until - diff)});
+    }
+    if (currentAppState === 'background') {
+      this.setState({wentBackgroundAt: Date.now()});
+    }
   }
 
   getTimeLeft = () => {
@@ -59,10 +74,11 @@ class CountDown extends React.Component {
       clearInterval(this.timer);
       if (this.onFinish) {
         this.onFinish();
+        this.setState({until: 0});
       }
+    } else {
+      this.setState({until: until - 1});
     }
-
-    this.setState({until: until - 1});
   };
 
   renderDigit = (d) => {
