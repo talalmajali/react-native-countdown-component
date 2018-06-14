@@ -46,6 +46,12 @@ class CountDown extends React.Component {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      until: nextProps.until,
+    });
+  }
+
   _handleAppStateChange = currentAppState => {
     const {until, wentBackgroundAt} = this.state;
     if (currentAppState === 'active' && wentBackgroundAt) {
