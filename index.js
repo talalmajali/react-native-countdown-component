@@ -131,16 +131,16 @@ class CountDown extends React.Component {
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
     const Component = this.props.onPress ? TouchableOpacity : View;
+    const data = timeToShow.map((val, i) => {
+      return _.includes(timeToShow, val) ? this.renderDoubleDigits(this.props[`label${val}`], newTime[i]) : null
+    });
 
     return (
       <Component
         style={styles.timeCont}
         onPress={this.props.onPress}
       >
-        {_.includes(timeToShow, 'D') ? this.renderDoubleDigits('Days', newTime[0]) : null}
-        {_.includes(timeToShow, 'H') ? this.renderDoubleDigits('Hours', newTime[1]) : null}
-        {_.includes(timeToShow, 'M') ? this.renderDoubleDigits('Minutes', newTime[2]) : null}
-        {_.includes(timeToShow, 'S') ? this.renderDoubleDigits('Seconds', newTime[3]) : null}
+        {data}
       </Component>
     );
   };
@@ -159,6 +159,10 @@ CountDown.defaultProps = {
   digitTxtColor: DEFAULT_DIGIT_TXT_COLOR,
   timeTxtColor: DEFAULT_TIME_TXT_COLOR,
   timeToShow: DEFAULT_TIME_TO_SHOW,
+  labelD: "Days",
+  labelH: "Hours",
+  labelM: "Minutes",
+  labelS: "Seconds",
   until: 0,
   size: 15,
 };
