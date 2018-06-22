@@ -16,6 +16,7 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | onFinish | What function should be invoked when the time is 0 | func | null |
 | onPress | What function should be invoked when clicking on the timer | func | null |
 | timeToShow | What Digits to show | array | ['D', 'H', 'M', 'S'] |
+| labelD/H/M/S | Text to show in label | string | 'Days' / 'Hours' / 'Minutes' / 'Seconds' |
 
 
 ## Preview
