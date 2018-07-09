@@ -17,6 +17,7 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | onPress | What function should be invoked when clicking on the timer | func | null |
 | timeToShow | What Digits to show | array | ['D', 'H', 'M', 'S'] |
 | labelD/H/M/S | Text to show in label | string | 'Days' / 'Hours' / 'Minutes' / 'Seconds' |
+| onTimerChange | Function to add custom conditions to change color for e.g | func | until |
 
 
 ## Preview
@@ -33,6 +34,7 @@ render() {
         until={10}
         onFinish={() => alert('finished')}
         onPress={() => alert('hello')}
+        onTimerChange={(until) => { console.log(until) }}
         size={20}
       />
     )

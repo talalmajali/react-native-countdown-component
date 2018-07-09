@@ -26,6 +26,7 @@ class CountDown extends React.Component {
     until: PropTypes.number,
     onFinish: PropTypes.func,
     onPress: PropTypes.func,
+    onTimerChange: PropTypes.func
   };
 
   state = {
@@ -83,7 +84,9 @@ class CountDown extends React.Component {
         this.setState({until: 0});
       }
     } else {
-      this.setState({until: until - 1});
+      let nextUntil = until - 1;
+      this.setState({until: nextUntil});
+      this.props.onTimerChange(nextUntil);
     }
   };
 
@@ -155,6 +158,7 @@ class CountDown extends React.Component {
 }
 
 CountDown.defaultProps = {
+  onTimerChange: (until) => {},
   digitBgColor: DEFAULT_BG_COLOR,
   digitTxtColor: DEFAULT_DIGIT_TXT_COLOR,
   timeTxtColor: DEFAULT_TIME_TXT_COLOR,
