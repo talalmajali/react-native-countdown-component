@@ -185,7 +185,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   digitCont: {
-
     borderRadius: 5,
     marginHorizontal: 2,
     alignItems: 'center',
@@ -198,6 +197,7 @@ const styles = StyleSheet.create({
   digitTxt: {
     color: 'white',
     fontWeight: 'bold',
+    fontVariant: ['tabular-nums']
   },
 });
 
