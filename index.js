@@ -29,7 +29,7 @@ class CountDown extends React.Component {
   };
 
   state = {
-    until: this.props.until,
+    until: Math.max(this.props.until, 0),
     wentBackgroundAt: null,
   };
 
@@ -49,7 +49,7 @@ class CountDown extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.until !== nextProps.until) {
       this.setState({
-        until: nextProps.until,
+        until: Math.max(nextProps.until, 0)
       });
     }
   }
@@ -78,11 +78,10 @@ class CountDown extends React.Component {
   updateTimer = () => {
     const {until} = this.state;
 
-    if (until <= 1) {
+    if (until <= 0) {
       clearInterval(this.timer);
       if (this.onFinish) {
         this.onFinish();
-        this.setState({until: 0});
       }
     } else {
       this.setState({until: until - 1});
