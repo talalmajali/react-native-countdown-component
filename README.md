@@ -38,3 +38,27 @@ render() {
     )
 }
 ```
+
+## Preview
+
+![React Native Countdown](https://media.giphy.com/media/wIwc1dinsZhx6v2PxB/giphy.gif "React Native Countdown")
+
+## Code
+```javascript
+import CountDown from 'react-native-countdown-component';
+
+render() {
+    return (
+      <CountDown
+        until={60 * 10 + 30}
+        size={30}
+        onFinish={() => alert('Finished')}
+        digitBgColor={'#fff'}
+        digitTxtColor={'#1CC625'}
+        timeToShow={['M', 'S']}
+        labelM={'MM'}
+        labelS={'SS'}
+      />
+    )
+}
+```
