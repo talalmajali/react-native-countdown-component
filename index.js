@@ -43,6 +43,7 @@ class CountDown extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.timer);
+    this.timer = null;
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
@@ -51,6 +52,9 @@ class CountDown extends React.Component {
       this.setState({
         until: Math.max(nextProps.until, 0)
       });
+      if (!this.timer) {
+        this.timer = setInterval(this.updateTimer, 1000);
+      }
     }
   }
 
@@ -80,6 +84,7 @@ class CountDown extends React.Component {
 
     if (until <= 1) {
       clearInterval(this.timer);
+      this.timer = null;
       this.setState({until: 0});
       if (this.onFinish) {
         this.onFinish();
