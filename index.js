@@ -20,7 +20,9 @@ class CountDown extends React.Component {
   static propTypes = {
     digitBgColor: PropTypes.string,
     digitTxtColor: PropTypes.string,
+    digitFontFamily: PropTypes.string,
     timeTxtColor: PropTypes.string,
+    timeTxtFontFamily: PropTypes.string,
     timeToShow: PropTypes.array,
     size: PropTypes.number,
     until: PropTypes.number,
@@ -95,7 +97,7 @@ class CountDown extends React.Component {
   };
 
   renderDigit = (d) => {
-    const {digitBgColor, digitTxtColor, size} = this.props;
+    const {digitBgColor, digitTxtColor, digitFontFamily, size} = this.props;
     return (
       <View style={[
         styles.digitCont,
@@ -105,7 +107,8 @@ class CountDown extends React.Component {
         <Text style={[
           styles.digitTxt,
           {fontSize: size},
-          {color: digitTxtColor}
+          {color: digitTxtColor},
+          {fontFamily: digitFontFamily},
         ]}>
           {d}
         </Text>
@@ -114,7 +117,7 @@ class CountDown extends React.Component {
   };
 
   renderDoubleDigits = (label, digits) => {
-    const {timeTxtColor, size} = this.props;
+    const {timeTxtColor, timeTxtFontFamily, size} = this.props;
 
     return (
       <View style={styles.doubleDigitCont}>
@@ -125,6 +128,7 @@ class CountDown extends React.Component {
           styles.timeTxt,
           {fontSize: size / 1.8},
           {color: timeTxtColor},
+          {fontFamily: timeTxtFontFamily},
         ]}>
           {label}
         </Text>
@@ -164,7 +168,9 @@ class CountDown extends React.Component {
 CountDown.defaultProps = {
   digitBgColor: DEFAULT_BG_COLOR,
   digitTxtColor: DEFAULT_DIGIT_TXT_COLOR,
+  digitFontFamily: null,
   timeTxtColor: DEFAULT_TIME_TXT_COLOR,
+  timeTxtFontFamily: null,
   timeToShow: DEFAULT_TIME_TO_SHOW,
   labelD: "Days",
   labelH: "Hours",
