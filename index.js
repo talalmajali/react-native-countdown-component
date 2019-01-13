@@ -15,6 +15,12 @@ const DEFAULT_DIGIT_STYLE = {backgroundColor: '#FAB913'};
 const DEFAULT_DIGIT_TXT_STYLE = {color: '#000'};
 const DEFAULT_TIME_LABEL_STYLE = {color: '#000'};
 const DEFAULT_TIME_TO_SHOW = ['D', 'H', 'M', 'S'];
+const DEFAULT_TIME_LABELS = {
+  d: 'Days',
+  h: 'Hours',
+  m: 'Minutes',
+  s: 'Seconds',
+};
 
 class CountDown extends React.Component {
   static propTypes = {
@@ -137,7 +143,7 @@ class CountDown extends React.Component {
   };
 
   renderCountDown = () => {
-    const {timeToShow} = this.props;
+    const {timeToShow, timeLabels} = this.props;
     const {until} = this.state;
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
@@ -148,10 +154,10 @@ class CountDown extends React.Component {
         style={styles.timeCont}
         onPress={this.props.onPress}
       >
-        {_.includes(timeToShow, 'D') ? this.renderDoubleDigits(this.props['labelD'], newTime[0]) : null}
-        {_.includes(timeToShow, 'H') ? this.renderDoubleDigits(this.props['labelH'], newTime[1]) : null}
-        {_.includes(timeToShow, 'M') ? this.renderDoubleDigits(this.props['labelM'], newTime[2]) : null}
-        {_.includes(timeToShow, 'S') ? this.renderDoubleDigits(this.props['labelS'], newTime[3]) : null}
+        {_.includes(timeToShow, 'D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
+        {_.includes(timeToShow, 'H') ? this.renderDoubleDigits(timeLabels.h, newTime[1]) : null}
+        {_.includes(timeToShow, 'M') ? this.renderDoubleDigits(timeLabels.m, newTime[2]) : null}
+        {_.includes(timeToShow, 'S') ? this.renderDoubleDigits(timeLabels.s, newTime[3]) : null}
       </Component>
     );
   };
@@ -169,11 +175,8 @@ CountDown.defaultProps = {
   digitStyle: DEFAULT_DIGIT_STYLE,
   digitTxtStyle: DEFAULT_DIGIT_TXT_STYLE,
   timeLabelStyle: DEFAULT_TIME_LABEL_STYLE,
+  timeLabels: DEFAULT_TIME_LABELS,
   timeToShow: DEFAULT_TIME_TO_SHOW,
-  labelD: "Days",
-  labelH: "Hours",
-  labelM: "Minutes",
-  labelS: "Seconds",
   until: 0,
   size: 15,
 };
