@@ -11,21 +11,22 @@ import {
 import _ from 'lodash';
 import {sprintf} from 'sprintf-js';
 
-const DEFAULT_BG_COLOR = '#FAB913';
-const DEFAULT_TIME_TXT_COLOR = '#000';
-const DEFAULT_DIGIT_TXT_COLOR = '#000';
+const DEFAULT_DIGIT_STYLE = {backgroundColor: '#FAB913'};
+const DEFAULT_DIGIT_TXT_STYLE = {color: '#000'};
+const DEFAULT_TIME_LABEL_STYLE = {color: '#000'};
 const DEFAULT_TIME_TO_SHOW = ['D', 'H', 'M', 'S'];
 
 class CountDown extends React.Component {
   static propTypes = {
-    digitBgColor: PropTypes.string,
-    digitTxtColor: PropTypes.string,
-    timeTxtColor: PropTypes.string,
+    digitStyle: PropTypes.object,
+    digitTxtStyle: PropTypes.object,
+    timeLabelStyle: PropTypes.object,
     timeToShow: PropTypes.array,
     size: PropTypes.number,
     until: PropTypes.number,
-    onFinish: PropTypes.func,
+    onChange: PropTypes.func,
     onPress: PropTypes.func,
+    onFinish: PropTypes.func,
   };
 
   state = {
@@ -90,22 +91,25 @@ class CountDown extends React.Component {
         this.onFinish();
       }
     } else {
+      if (this.props.onChange) {
+        this.props.onChange();
+      }
       this.setState({until: until - 1});
     }
   };
 
   renderDigit = (d) => {
-    const {digitBgColor, digitTxtColor, size} = this.props;
+    const {digitStyle, digitTxtStyle, size} = this.props;
     return (
       <View style={[
         styles.digitCont,
-        {backgroundColor: digitBgColor},
+        digitStyle,
         {width: size * 2.3, height: size * 2.6},
       ]}>
         <Text style={[
           styles.digitTxt,
           {fontSize: size},
-          {color: digitTxtColor}
+          digitTxtStyle,
         ]}>
           {d}
         </Text>
@@ -114,7 +118,7 @@ class CountDown extends React.Component {
   };
 
   renderDoubleDigits = (label, digits) => {
-    const {timeTxtColor, size} = this.props;
+    const {timeLabelStyle, size} = this.props;
 
     return (
       <View style={styles.doubleDigitCont}>
@@ -124,7 +128,7 @@ class CountDown extends React.Component {
         <Text style={[
           styles.timeTxt,
           {fontSize: size / 1.8},
-          {color: timeTxtColor},
+          timeLabelStyle,
         ]}>
           {label}
         </Text>
@@ -162,9 +166,9 @@ class CountDown extends React.Component {
 }
 
 CountDown.defaultProps = {
-  digitBgColor: DEFAULT_BG_COLOR,
-  digitTxtColor: DEFAULT_DIGIT_TXT_COLOR,
-  timeTxtColor: DEFAULT_TIME_TXT_COLOR,
+  digitStyle: DEFAULT_DIGIT_STYLE,
+  digitTxtStyle: DEFAULT_DIGIT_TXT_STYLE,
+  timeLabelStyle: DEFAULT_TIME_LABEL_STYLE,
   timeToShow: DEFAULT_TIME_TO_SHOW,
   labelD: "Days",
   labelH: "Hours",
