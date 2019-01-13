@@ -10,8 +10,9 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | style | Override the component style | object | {} |
 | digitBgColor |  Digit background color | string | ![#FAB913](https://placehold.it/15/FAB913/000000?text=+) `'#FAB913'` |
 | digitTxtColor | Digit text color | string | ![#000000](https://placehold.it/15/000/000000?text=+) `'#000000'` |
+| digitTxtStyle | Override default Digit style | object | {}|
 | timeTxtColor | Time labels text color | string | ![#000000](https://placehold.it/15/000/000000?text=+) `'#000000'` |
-| timeLabelStyle | Override the time labels style | object | {} |
+| timeLabelStyle | Override default time labels style | object | {} |
 | size | Size of the countdown component | number | 15 |
 | until | Number of seconds to countdown | number | 0 |
 | onFinish | What function should be invoked when the time is 0 | func | null |
