@@ -8,15 +8,16 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | Name | Description | Type | Default Value |
 | :--- | :----- | :--- | :---: |
 | style | Override the component style | object | {} |
-| digitBgColor |  Digit background color | string | ![#FAB913](https://placehold.it/15/FAB913/000000?text=+) `'#FAB913'` |
-| digitTxtColor | Digit text color | string | ![#000000](https://placehold.it/15/000/000000?text=+) `'#000000'` |
-| timeTxtColor | Time labels text color | string | ![#000000](https://placehold.it/15/000/000000?text=+) `'#000000'` |
+| digitStyle |  Digit style | object | {backgroundColor: ![#FAB913](https://placehold.it/15/FAB913/000000?text=+) `'#FAB913'`} |
+| digitTxtStyle | Digit Text style | object | {color: ![#FAB913](https://placehold.it/15/FAB913/000000?text=+) `'#000'`} |
+| timeLabelStyle | Time Label style | object | {color: ![#FAB913](https://placehold.it/15/FAB913/000000?text=+) `'#000'`} |
 | size | Size of the countdown component | number | 15 |
 | until | Number of seconds to countdown | number | 0 |
 | onFinish | What function should be invoked when the time is 0 | func | null |
+| onChange | What function should be invoked when the timer is changing | func | null |
 | onPress | What function should be invoked when clicking on the timer | func | null |
 | timeToShow | What Digits to show | array | ['D', 'H', 'M', 'S'] |
-| labelD/H/M/S | Text to show in label | string | 'Days' / 'Hours' / 'Minutes' / 'Seconds' |
+| timeLabels | Text to show in time label | object | {d: 'Days', h: 'Hours', m: 'Minutes', s: 'Seconds'} |
 
 
 ## Preview
@@ -53,11 +54,10 @@ render() {
         until={60 * 10 + 30}
         size={30}
         onFinish={() => alert('Finished')}
-        digitBgColor={'#fff'}
-        digitTxtColor={'#1CC625'}
+        digitStyle={{backgroundColor: '#FFF'}}
+        digitTxtStyle={{color: '#1CC625'}}
         timeToShow={['M', 'S']}
-        labelM={'MM'}
-        labelS={'SS'}
+        timeLabels={{m: 'MM', s: 'SS'}}
       />
     )
 }
