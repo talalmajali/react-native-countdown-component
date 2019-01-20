@@ -104,13 +104,13 @@ class CountDown extends React.Component {
     }
   };
 
-  renderDigit = (d) => {
-    const {digitStyle, digitTxtStyle, size} = this.props;
+  renderDigit = (d, id) => {
+    const {digitStyle, digitTxtStyle, size, separator} = this.props;
     return (
       <View style={[
+        {width: size * 2.3, height: size * 2.6},
         styles.digitCont,
         digitStyle,
-        {width: size * 2.3, height: size * 2.6},
       ]}>
         <Text style={[
           styles.digitTxt,
@@ -118,18 +118,19 @@ class CountDown extends React.Component {
           digitTxtStyle,
         ]}>
           {d}
+          {separator && 'S' !== id ? separator : ''}
         </Text>
       </View>
     );
   };
 
-  renderDoubleDigits = (label, digits) => {
+  renderDoubleDigits = (label, digits, id) => {
     const {timeLabelStyle, size} = this.props;
 
     return (
       <View style={styles.doubleDigitCont}>
         <View style={styles.timeInnerCont}>
-          {this.renderDigit(digits)}
+          {this.renderDigit(digits, id)}
         </View>
         <Text style={[
           styles.timeTxt,
@@ -154,10 +155,10 @@ class CountDown extends React.Component {
         style={styles.timeCont}
         onPress={this.props.onPress}
       >
-        {_.includes(timeToShow, 'D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
-        {_.includes(timeToShow, 'H') ? this.renderDoubleDigits(timeLabels.h, newTime[1]) : null}
-        {_.includes(timeToShow, 'M') ? this.renderDoubleDigits(timeLabels.m, newTime[2]) : null}
-        {_.includes(timeToShow, 'S') ? this.renderDoubleDigits(timeLabels.s, newTime[3]) : null}
+        {_.includes(timeToShow, 'D') ? this.renderDoubleDigits(timeLabels.d, newTime[0], 'D') : null}
+        {_.includes(timeToShow, 'H') ? this.renderDoubleDigits(timeLabels.h, newTime[1], 'H') : null}
+        {_.includes(timeToShow, 'M') ? this.renderDoubleDigits(timeLabels.m, newTime[2], 'M') : null}
+        {_.includes(timeToShow, 'S') ? this.renderDoubleDigits(timeLabels.s, newTime[3], 'S') : null}
       </Component>
     );
   };
