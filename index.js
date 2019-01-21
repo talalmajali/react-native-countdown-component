@@ -33,6 +33,7 @@ class CountDown extends React.Component {
     onChange: PropTypes.func,
     onPress: PropTypes.func,
     onFinish: PropTypes.func,
+    running: PropTypes.bool
   };
 
   state = {
@@ -44,7 +45,9 @@ class CountDown extends React.Component {
     if (this.props.onFinish) {
       this.onFinish = _.once(this.props.onFinish);
     }
-    this.timer = setInterval(this.updateTimer, 1000);
+    if(this.props.running != false) {
+      this.timer = setInterval(this.updateTimer, 1000);
+    }
     AppState.addEventListener('change', this._handleAppStateChange);
   }
 
@@ -59,7 +62,16 @@ class CountDown extends React.Component {
       this.setState({
         until: Math.max(nextProps.until, 0)
       });
-      if (!this.timer) {
+      if ((!this.timer)&&(nextProps.running != false)) {
+          this.timer = setInterval(this.updateTimer, 1000);
+      }
+    }
+    if (this.props.running !== nextProps.running) {
+      if(nextProps.running == false) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+      if(nextProps.running == true) {
         this.timer = setInterval(this.updateTimer, 1000);
       }
     }
@@ -179,6 +191,7 @@ CountDown.defaultProps = {
   timeToShow: DEFAULT_TIME_TO_SHOW,
   until: 0,
   size: 15,
+  running: true
 };
 
 const styles = StyleSheet.create({
