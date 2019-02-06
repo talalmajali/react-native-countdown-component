@@ -33,6 +33,7 @@ class CountDown extends React.Component {
     onChange: PropTypes.func,
     onPress: PropTypes.func,
     onFinish: PropTypes.func,
+    hideLabels: PropTypes.bool,
   };
 
   state = {
@@ -124,20 +125,20 @@ class CountDown extends React.Component {
   };
 
   renderDoubleDigits = (label, digits) => {
-    const {timeLabelStyle, size} = this.props;
+    const {timeLabelStyle, size, hideLabels} = this.props;
 
     return (
       <View style={styles.doubleDigitCont}>
         <View style={styles.timeInnerCont}>
           {this.renderDigit(digits)}
         </View>
-        <Text style={[
+        {hideLabels ? null :<Text style={[
           styles.timeTxt,
           {fontSize: size / 1.8},
           timeLabelStyle,
         ]}>
           {label}
-        </Text>
+        </Text>}
       </View>
     );
   };

@@ -18,6 +18,7 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | onPress | What function should be invoked when clicking on the timer | func | null |
 | timeToShow | What Digits to show | array | ['D', 'H', 'M', 'S'] |
 | timeLabels | Text to show in time label | object | {d: 'Days', h: 'Hours', m: 'Minutes', s: 'Seconds'} |
+| hideLabels | Hide Labels under countdown | boolean | false |
 
 
 ## Preview
