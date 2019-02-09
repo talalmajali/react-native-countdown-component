@@ -40,31 +40,30 @@ class CountDown extends React.Component {
 
   state = {
     until: Math.max(this.props.until, 0),
+    lastUntil: null,
     wentBackgroundAt: null,
   };
 
-  componentDidMount() {
-    if (this.props.onFinish) {
-      this.onFinish = _.once(this.props.onFinish);
-    }
+  constructor(props) {
+    super(props);
     this.timer = setInterval(this.updateTimer, 1000);
+  }
+
+  componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
-    this.timer = null;
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.until !== nextProps.until) {
       this.setState({
+        lastUntil: this.state.until,
         until: Math.max(nextProps.until, 0)
       });
-      if (!this.timer) {
-        this.timer = setInterval(this.updateTimer, 1000);
-      }
     }
   }
 
@@ -72,7 +71,10 @@ class CountDown extends React.Component {
     const {until, wentBackgroundAt} = this.state;
     if (currentAppState === 'active' && wentBackgroundAt) {
       const diff = (Date.now() - wentBackgroundAt) / 1000.0;
-      this.setState({until: Math.max(0, until - diff)});
+      this.setState({
+        lastUntil: until,
+        until: Math.max(0, until - diff)
+      });
     }
     if (currentAppState === 'background') {
       this.setState({wentBackgroundAt: Date.now()});
@@ -90,20 +92,27 @@ class CountDown extends React.Component {
   };
 
   updateTimer = () => {
-    const {until} = this.state;
+    const {lastUntil, until} = this.state;
 
-    if (until <= 1) {
-      clearInterval(this.timer);
-      this.timer = null;
-      this.setState({until: 0});
-      if (this.onFinish) {
-        this.onFinish();
+    if (lastUntil === until) {
+      return;
+    }
+    if (until === 1 || (until === 0 && lastUntil !== 1)) {
+      if (this.props.onFinish) {
+        this.props.onFinish();
       }
+      if (this.props.onChange) {
+        this.props.onChange();
+      }
+    }
+
+    if (until === 0) {
+      this.setState({lastUntil: 0, until: 0});
     } else {
       if (this.props.onChange) {
         this.props.onChange();
       }
-      this.setState({until: until - 1});
+      this.setState({lastUntil: until, until: until - 1});
     }
   };
 
