@@ -14,6 +14,7 @@ import {sprintf} from 'sprintf-js';
 const DEFAULT_DIGIT_STYLE = {backgroundColor: '#FAB913'};
 const DEFAULT_DIGIT_TXT_STYLE = {color: '#000'};
 const DEFAULT_TIME_LABEL_STYLE = {color: '#000'};
+const DEFAULT_SEPARATOR_STYLE = {color: '#000'};
 const DEFAULT_TIME_TO_SHOW = ['D', 'H', 'M', 'S'];
 const DEFAULT_TIME_LABELS = {
   d: 'Days',
@@ -27,7 +28,9 @@ class CountDown extends React.Component {
     digitStyle: PropTypes.object,
     digitTxtStyle: PropTypes.object,
     timeLabelStyle: PropTypes.object,
+    separatorStyle: PropTypes.object,
     timeToShow: PropTypes.array,
+    showSeparator: PropTypes.bool,
     size: PropTypes.number,
     until: PropTypes.number,
     onChange: PropTypes.func,
@@ -123,14 +126,10 @@ class CountDown extends React.Component {
     );
   };
 
-  renderDoubleDigits = (label, digits) => {
+  renderLabel = label => {
     const {timeLabelStyle, size} = this.props;
-
-    return (
-      <View style={styles.doubleDigitCont}>
-        <View style={styles.timeInnerCont}>
-          {this.renderDigit(digits)}
-        </View>
+    if (label) {
+      return (
         <Text style={[
           styles.timeTxt,
           {fontSize: size / 1.8},
@@ -138,12 +137,38 @@ class CountDown extends React.Component {
         ]}>
           {label}
         </Text>
+      );
+    }
+  };
+
+  renderDoubleDigits = (label, digits) => {
+    return (
+      <View style={styles.doubleDigitCont}>
+        <View style={styles.timeInnerCont}>
+          {this.renderDigit(digits)}
+        </View>
+        {this.renderLabel(label)}
+      </View>
+    );
+  };
+
+  renderSeparator = () => {
+    const {separatorStyle, size} = this.props;
+    return (
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={[
+          styles.separatorTxt,
+          {fontSize: size * 1.2},
+          separatorStyle,
+        ]}>
+          {':'}
+        </Text>
       </View>
     );
   };
 
   renderCountDown = () => {
-    const {timeToShow, timeLabels} = this.props;
+    const {timeToShow, timeLabels, showSeparator} = this.props;
     const {until} = this.state;
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
@@ -154,10 +179,13 @@ class CountDown extends React.Component {
         style={styles.timeCont}
         onPress={this.props.onPress}
       >
-        {_.includes(timeToShow, 'D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
-        {_.includes(timeToShow, 'H') ? this.renderDoubleDigits(timeLabels.h, newTime[1]) : null}
-        {_.includes(timeToShow, 'M') ? this.renderDoubleDigits(timeLabels.m, newTime[2]) : null}
-        {_.includes(timeToShow, 'S') ? this.renderDoubleDigits(timeLabels.s, newTime[3]) : null}
+        {timeToShow.includes('D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
+        {showSeparator && timeToShow.includes('D') && timeToShow.includes('H') ? this.renderSeparator() : null}
+        {timeToShow.includes('H') ? this.renderDoubleDigits(timeLabels.h, newTime[1]) : null}
+        {showSeparator && timeToShow.includes('H') && timeToShow.includes('M') ? this.renderSeparator() : null}
+        {timeToShow.includes('M') ? this.renderDoubleDigits(timeLabels.m, newTime[2]) : null}
+        {showSeparator && timeToShow.includes('M') && timeToShow.includes('S') ? this.renderSeparator() : null}
+        {timeToShow.includes('S') ? this.renderDoubleDigits(timeLabels.s, newTime[3]) : null}
       </Component>
     );
   };
@@ -176,7 +204,9 @@ CountDown.defaultProps = {
   digitTxtStyle: DEFAULT_DIGIT_TXT_STYLE,
   timeLabelStyle: DEFAULT_TIME_LABEL_STYLE,
   timeLabels: DEFAULT_TIME_LABELS,
+  separatorStyle: DEFAULT_SEPARATOR_STYLE,
   timeToShow: DEFAULT_TIME_TO_SHOW,
+  showSeparator: false,
   until: 0,
   size: 15,
 };
@@ -210,6 +240,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontVariant: ['tabular-nums']
+  },
+  separatorTxt: {
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
   },
 });
 
