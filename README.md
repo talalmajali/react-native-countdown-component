@@ -11,6 +11,7 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | digitStyle |  Digit style | object | {backgroundColor: ![#FAB913](https://placehold.it/15/FAB913/000000?text=+) `'#FAB913'`} |
 | digitTxtStyle | Digit Text style | object | {color: ![#FAB913](https://placehold.it/15/000000/000000?text=+) `'#000'`} |
 | timeLabelStyle | Time Label style | object | {color: ![#FAB913](https://placehold.it/15/000000/000000?text=+) `'#000'`} |
+| separatorStyle | Separator style | object | {color: ![#FAB913](https://placehold.it/15/000000/000000?text=+) `'#000'`} |
 | size | Size of the countdown component | number | 15 |
 | until | Number of seconds to countdown | number | 0 |
 | onFinish | What function should be invoked when the time is 0 | func | null |
@@ -18,6 +19,7 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | onPress | What function should be invoked when clicking on the timer | func | null |
 | timeToShow | What Digits to show | array | ['D', 'H', 'M', 'S'] |
 | timeLabels | Text to show in time label | object | {d: 'Days', h: 'Hours', m: 'Minutes', s: 'Seconds'} |
+| showSeparator | Should show separator | bool | false |
 
 
 ## Preview
@@ -40,7 +42,7 @@ render() {
 }
 ```
 
-## Preview
+## Custom Styling Example
 
 ![React Native Countdown](https://media.giphy.com/media/wIwc1dinsZhx6v2PxB/giphy.gif "React Native Countdown")
 
@@ -58,6 +60,34 @@ render() {
         digitTxtStyle={{color: '#1CC625'}}
         timeToShow={['M', 'S']}
         timeLabels={{m: 'MM', s: 'SS'}}
+      />
+    )
+}
+```
+
+
+## Separator Example
+
+![React Native Countdown](https://media.giphy.com/media/4H7qQF4UPwQKEc0Qpx/giphy.gif "React Native Countdown")
+
+
+## Code
+```javascript
+import CountDown from 'react-native-countdown-component';
+
+render() {
+    return (
+      <CountDown
+        size={30}
+        until={1000}
+        onFinish={() => alert('Finished')}
+        digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1CC625'}}
+        digitTxtStyle={{color: '#1CC625'}}
+        timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
+        separatorStyle={{color: '#1CC625'}}
+        timeToShow={['H', 'M', 'S']}
+        timeLabels={{m: null, s: null}}
+        showSeparator
       />
     )
 }
