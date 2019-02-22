@@ -69,7 +69,7 @@ class CountDown extends React.Component {
 
   _handleAppStateChange = currentAppState => {
     const {until, wentBackgroundAt} = this.state;
-    if (currentAppState === 'active' && wentBackgroundAt) {
+    if (currentAppState === 'active' && wentBackgroundAt && this.props.running) {
       const diff = (Date.now() - wentBackgroundAt) / 1000.0;
       this.setState({
         lastUntil: until,
@@ -94,7 +94,7 @@ class CountDown extends React.Component {
   updateTimer = () => {
     const {lastUntil, until} = this.state;
 
-    if (lastUntil === until) {
+    if (lastUntil === until || !this.props.running) {
       return;
     }
     if (until === 1 || (until === 0 && lastUntil !== 1)) {
@@ -218,6 +218,7 @@ CountDown.defaultProps = {
   showSeparator: false,
   until: 0,
   size: 15,
+  running: true,
 };
 
 const styles = StyleSheet.create({
