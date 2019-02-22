@@ -20,6 +20,7 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | timeToShow | What Digits to show | array | ['D', 'H', 'M', 'S'] |
 | timeLabels | Text to show in time label | object | {d: 'Days', h: 'Hours', m: 'Minutes', s: 'Seconds'} |
 | showSeparator | Should show separator | bool | false |
+| running | a boolean to pause and resume the component | bool | true |
 
 
 ## Preview
