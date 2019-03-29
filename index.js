@@ -36,6 +36,7 @@ class CountDown extends React.Component {
     onChange: PropTypes.func,
     onPress: PropTypes.func,
     onFinish: PropTypes.func,
+    running: PropTypes.bool,
   };
 
   state = {
@@ -59,13 +60,14 @@ class CountDown extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-//     if (this.props.until !== nextProps.until) {
+    if (this.props.running && (this.props.until === nextProps.until)) {
+      return;
+    }
       this.setState({
         lastUntil: this.state.until,
         until: Math.max(nextProps.until, 0),
         running: nextProps.running,
       });
-//     }
   }
 
   _handleAppStateChange = currentAppState => {
