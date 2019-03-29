@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -59,12 +59,12 @@ class CountDown extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.until !== nextProps.until) {
+//     if (this.props.until !== nextProps.until) {
       this.setState({
         lastUntil: this.state.until,
         until: Math.max(nextProps.until, 0)
       });
-    }
+//     }
   }
 
   _handleAppStateChange = currentAppState => {
