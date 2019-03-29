@@ -60,7 +60,8 @@ class CountDown extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.running && (this.props.until === nextProps.until)) {
+//     if (this.props.running && (this.props.until === nextProps.until)) {
+    if (nextProps.running && (this.props.until === nextProps.until)) {
       return;
     }
       this.setState({
