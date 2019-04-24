@@ -112,7 +112,10 @@ class CountDown extends React.Component {
       if (this.props.onChange) {
         this.props.onChange(until);
       }
-      this.setState({lastUntil: until, until: until - 1});
+      this.setState({
+        lastUntil: until,
+        until: Math.max(0, until - 1)
+      });
     }
   };
 
