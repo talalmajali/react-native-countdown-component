@@ -260,4 +260,5 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = CountDown;
+export default CountDown;
+export { CountDown };
