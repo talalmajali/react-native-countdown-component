@@ -25,6 +25,7 @@ const DEFAULT_TIME_LABELS = {
 
 class CountDown extends React.Component {
   static propTypes = {
+    id: PropTypes.string,
     digitStyle: PropTypes.object,
     digitTxtStyle: PropTypes.object,
     timeLabelStyle: PropTypes.object,
@@ -59,7 +60,7 @@ class CountDown extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.until !== nextProps.until) {
+    if (this.props.until !== nextProps.until || this.props.id !== nextProps.id) {
       this.setState({
         lastUntil: this.state.until,
         until: Math.max(nextProps.until, 0)
