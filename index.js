@@ -93,29 +93,31 @@ class CountDown extends React.Component {
   };
 
   updateTimer = () => {
-    const {lastUntil, until} = this.state;
+    // Don't fetch these values here, because their value might be changed
+    // in another thread
+    // const {lastUntil, until} = this.state;
 
-    if (lastUntil === until || !this.props.running) {
+    if (this.state.lastUntil === this.state.until || !this.props.running) {
       return;
     }
-    if (until === 1 || (until === 0 && lastUntil !== 1)) {
+    if (this.state.until === 1 || (this.state.until === 0 && this.state.lastUntil !== 1)) {
       if (this.props.onFinish) {
         this.props.onFinish();
       }
       if (this.props.onChange) {
-        this.props.onChange(until);
+        this.props.onChange(this.state.until);
       }
     }
 
-    if (until === 0) {
+    if (this.state.until === 0) {
       this.setState({lastUntil: 0, until: 0});
     } else {
       if (this.props.onChange) {
-        this.props.onChange(until);
+        this.props.onChange(this.state.until);
       }
       this.setState({
-        lastUntil: until,
-        until: Math.max(0, until - 1)
+        lastUntil: this.state.until,
+        until: Math.max(0, this.state.until - 1)
       });
     }
   };
