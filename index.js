@@ -263,5 +263,6 @@ const styles = StyleSheet.create({
   },
 });
 
+
 export default CountDown;
 export { CountDown };
