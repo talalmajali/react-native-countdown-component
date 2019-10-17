@@ -98,4 +98,4 @@ export interface CountDownState {
     lastUntil: number | null;
     wentBackgroundAt: number | null;
 }
-export default class CountDown extends React.PureComponent<CountDownProps, CountDownState> {}
+export default class CountDown extends React.Component<CountDownProps, CountDownState> {}
