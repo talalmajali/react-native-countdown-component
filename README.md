@@ -19,6 +19,7 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 | onChange | What function should be invoked when the timer is changing | func | null |
 | onPress | What function should be invoked when clicking on the timer | func | null |
 | timeToShow | What Digits to show | array | ['D', 'H', 'M', 'S'] |
+| disableHoursLimit | If set to true, the hours part shows all remaining hours, not the remainder. Useful if using with timeToShow set to `['H', 'M', 'S']`. | boolean | false | 
 | timeLabels | Text to show in time label | object | {d: 'Days', h: 'Hours', m: 'Minutes', s: 'Seconds'} |
 | showSeparator | Should show separator | bool | false |
 | running | a boolean to pause and resume the component | bool | true |
