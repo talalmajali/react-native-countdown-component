@@ -6,7 +6,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  AppState
+  AppState,
+  I18nManager
 } from 'react-native';
 import _ from 'lodash';
 import {sprintf} from 'sprintf-js';
@@ -229,7 +230,7 @@ CountDown.defaultProps = {
 
 const styles = StyleSheet.create({
   timeCont: {
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     justifyContent: 'center',
   },
   timeTxt: {
