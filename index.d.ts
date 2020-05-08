@@ -1,7 +1,6 @@
 import {StyleProp, ViewStyle} from 'react-native';
 import * as React from 'react';
 
-declare module 'react-native-advanced-countdown-component' {
 
   export interface TimeLabels {
     d: string;
@@ -44,5 +43,3 @@ declare module 'react-native-advanced-countdown-component' {
     renderSeparator(): JSX.Element;
     renderCountdown(): JSX.Element;
   }
-
-}
