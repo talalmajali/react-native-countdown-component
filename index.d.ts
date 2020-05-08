@@ -18,20 +18,20 @@ declare module 'react-native-advanced-countdown-component' {
   }
 
   export interface CountdownPropTypes {
-    id: string,
-    digitStyle: StyleProp<ViewStyle>,
-    digitTxtStyle: StyleProp<ViewStyle>,
-    timeLabelStyle: StyleProp<ViewStyle>,
-    separatorStyle: StyleProp<ViewStyle>,
-    timeToShow: string[],
-    showSeparator: boolean,
-    size: number,
+    id?: string,
+    digitStyle?: StyleProp<ViewStyle>,
+    digitTxtStyle?: StyleProp<ViewStyle>,
+    timeLabelStyle?: StyleProp<ViewStyle>,
+    separatorStyle?: StyleProp<ViewStyle>,
+    timeToShow?: string[],
+    showSeparator?: boolean,
+    size?: number,
     until: number,
-    onChange: () => void,
-    onPress: () => void,
-    onFinish: () => void,
-    timeLabels: TimeLabels,
-    upperLabels: boolean
+    onChange?: () => void,
+    onPress?: () => void,
+    onFinish?: () => void,
+    timeLabels?: TimeLabels,
+    upperLabels?: boolean
   }
 
   export class CountdownComponent extends React.Component<CountdownPropTypes> {
@@ -44,5 +44,5 @@ declare module 'react-native-advanced-countdown-component' {
     renderSeparator(): JSX.Element;
     renderCountdown(): JSX.Element;
   }
-  
+
 }
