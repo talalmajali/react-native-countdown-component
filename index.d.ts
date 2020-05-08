@@ -1,7 +1,8 @@
 import {StyleProp, ViewStyle} from 'react-native';
 import * as React from 'react';
 
-
+declare module 'react-native-countdown-component'{
+  
   export interface TimeLabels {
     d: string;
     h: string;
@@ -33,7 +34,7 @@ import * as React from 'react';
     upperLabels?: boolean
   }
 
-  export class CountdownComponent extends React.Component<CountdownPropTypes> {
+  export default class CountdownComponent extends React.Component<CountdownPropTypes> {
     private _handleAppStateChange(): void;
     getTimeLeft(): Time;
     updateTimer(): void;
@@ -42,4 +43,7 @@ import * as React from 'react';
     renderDoubleDigits(label: string, digits: number, upperLabels: boolean): JSX.Element;
     renderSeparator(): JSX.Element;
     renderCountdown(): JSX.Element;
+    render(): JSX.Element;
   }
+
+}
