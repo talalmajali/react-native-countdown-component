@@ -26,8 +26,10 @@
     "url": "https://github.com/talalmajali/react-native-countdown-component/issues"
   },
   "dependencies": {
+    "@types/react-native": "^0.62.7",
     "lodash": "^4.17.13",
-    "sprintf-js": "^1.1.1",
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.5.8",
+    "react-native": "^0.62.2",
+    "sprintf-js": "^1.1.1"
   }
 }
