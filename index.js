@@ -37,6 +37,8 @@ class CountDown extends React.Component {
     onChange: PropTypes.func,
     onPress: PropTypes.func,
     onFinish: PropTypes.func,
+    timeLabels: PropTypes.object,
+    upperLabels: PropTypes.bool
   };
 
   state = {
@@ -164,13 +166,14 @@ class CountDown extends React.Component {
     }
   };
 
-  renderDoubleDigits = (label, digits) => {
+  renderDoubleDigits = (label, digits, upperLabels) => {
     return (
       <View style={styles.doubleDigitCont}>
+        {upperLabels && this.renderLabel(label)}
         <View style={styles.timeInnerCont}>
           {this.renderDigit(digits)}
         </View>
-        {this.renderLabel(label)}
+        {!upperLabels && this.renderLabel(label)}
       </View>
     );
   };
@@ -191,7 +194,7 @@ class CountDown extends React.Component {
   };
 
   renderCountDown = () => {
-    const {timeToShow, timeLabels, showSeparator} = this.props;
+    const {timeToShow, timeLabels, showSeparator, upperLabels} = this.props;
     const {until} = this.state;
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
@@ -202,13 +205,13 @@ class CountDown extends React.Component {
         style={styles.timeCont}
         onPress={this.props.onPress}
       >
-        {timeToShow.includes('D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
+        {timeToShow.includes('D') ? this.renderDoubleDigits(timeLabels.d, newTime[0], upperLabels) : null}
         {showSeparator && timeToShow.includes('D') && timeToShow.includes('H') ? this.renderSeparator() : null}
-        {timeToShow.includes('H') ? this.renderDoubleDigits(timeLabels.h, newTime[1]) : null}
+        {timeToShow.includes('H') ? this.renderDoubleDigits(timeLabels.h, newTime[1], upperLabels) : null}
         {showSeparator && timeToShow.includes('H') && timeToShow.includes('M') ? this.renderSeparator() : null}
-        {timeToShow.includes('M') ? this.renderDoubleDigits(timeLabels.m, newTime[2]) : null}
+        {timeToShow.includes('M') ? this.renderDoubleDigits(timeLabels.m, newTime[2], upperLabels) : null}
         {showSeparator && timeToShow.includes('M') && timeToShow.includes('S') ? this.renderSeparator() : null}
-        {timeToShow.includes('S') ? this.renderDoubleDigits(timeLabels.s, newTime[3]) : null}
+        {timeToShow.includes('S') ? this.renderDoubleDigits(timeLabels.s, newTime[3], upperLabels) : null}
       </Component>
     );
   };
