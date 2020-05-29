@@ -29,6 +29,7 @@ class CountDown extends React.Component {
     digitStyle: PropTypes.object,
     digitTxtStyle: PropTypes.object,
     timeLabelStyle: PropTypes.object,
+    showTimeLabels:PropTypes.bool,
     separatorStyle: PropTypes.object,
     timeToShow: PropTypes.array,
     showSeparator: PropTypes.bool,
@@ -165,12 +166,13 @@ class CountDown extends React.Component {
   };
 
   renderDoubleDigits = (label, digits) => {
+    const { showTimeLabels } = this.props;
     return (
       <View style={styles.doubleDigitCont}>
         <View style={styles.timeInnerCont}>
           {this.renderDigit(digits)}
         </View>
-        {this.renderLabel(label)}
+        {showTimeLabels && this.renderLabel(label)}
       </View>
     );
   };
@@ -227,6 +229,7 @@ CountDown.defaultProps = {
   digitTxtStyle: DEFAULT_DIGIT_TXT_STYLE,
   timeLabelStyle: DEFAULT_TIME_LABEL_STYLE,
   timeLabels: DEFAULT_TIME_LABELS,
+  showTimeLabels:true,
   separatorStyle: DEFAULT_SEPARATOR_STYLE,
   timeToShow: DEFAULT_TIME_TO_SHOW,
   showSeparator: false,
