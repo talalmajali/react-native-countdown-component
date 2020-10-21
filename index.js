@@ -95,7 +95,7 @@ class CountDown extends React.Component {
     return {
       seconds: until % 60,
       minutes: parseInt(until / 60, 10) % 60,
-      hours: parseInt(until / (60 * 60), 10) % 24,
+      hours: parseInt(until / (60 * 60), 10) % 24 + parseInt(until / (60 * 60 * 24), 10) * 24,
       days: parseInt(until / (60 * 60 * 24), 10),
     };
   };
