@@ -131,11 +131,11 @@ class CountDown extends React.Component {
   };
 
   renderDigit = (d) => {
-    const {digitStyle, digitTxtStyle, size} = this.props;
+    const {digitStyle, digitTxtStyle, size, width} = this.props;
     return (
       <View style={[
         styles.digitCont,        
-        {width: size * 2.3, height: size * 2.6},
+        {width: width, height: size * 2.6},
         digitStyle,
       ]}>
         <Text style={[
