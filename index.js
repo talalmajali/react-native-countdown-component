@@ -63,15 +63,13 @@ class CountDown extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     // the original code this.pros.until !== prevProps.until ... always false before timer is started
     // here we add inital check for timer, ensure every change in the timer will update the rendering.
-    if (!this.state.isStartedCountDown) {
+    if (!this.state.isStartedCountDown && (this.props.until !== prevState.until || this.props.id !== prevState.id)) {
       // this code will not be called when the timer started.
         this.setState({
           lastUntil: prevState.until,
           until: Math.max(prevProps.until, 0)
         });
-    }
-
-    if (this.props.until !== prevProps.until || this.props.id !== prevProps.id) {
+    } else if (this.props.until !== prevProps.until || this.props.id !== prevProps.id) {
       this.setState({
         lastUntil: prevState.until,
         until: Math.max(prevProps.until, 0)
