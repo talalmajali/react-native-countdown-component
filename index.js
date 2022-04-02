@@ -43,6 +43,7 @@ class CountDown extends React.Component {
     until: Math.max(this.props.until, 0),
     lastUntil: null,
     wentBackgroundAt: null,
+    isStartedCountDown: false,
   };
 
   constructor(props) {
@@ -60,7 +61,15 @@ class CountDown extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.until !== prevProps.until || this.props.id !== prevProps.id) {
+    // the original code this.pros.until !== prevProps.until ... always false before timer is started
+    // here we add inital check for timer, ensure every change in the timer will update the rendering.
+    if (!this.state.isStartedCountDown && (this.props.until !== prevState.until || this.props.id !== prevState.id)) {
+      // this code will not be called when the timer started.
+        this.setState({
+          lastUntil: prevState.until,
+          until: Math.max(prevProps.until, 0)
+        });
+    } else if (this.props.until !== prevProps.until || this.props.id !== prevProps.id) {
       this.setState({
         lastUntil: prevState.until,
         until: Math.max(prevProps.until, 0)
@@ -123,6 +132,9 @@ class CountDown extends React.Component {
       if (this.props.onChange) {
         this.props.onChange(this.state.until);
       }
+
+      this.state.isStartedCountDown = true;
+
       this.setState({
         lastUntil: this.state.until,
         until: Math.max(0, this.state.until - 1)
@@ -134,7 +146,7 @@ class CountDown extends React.Component {
     const {digitStyle, digitTxtStyle, size} = this.props;
     return (
       <View style={[
-        styles.digitCont,        
+        styles.digitCont,
         {width: size * 2.3, height: size * 2.6},
         digitStyle,
       ]}>
