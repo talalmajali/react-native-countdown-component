@@ -52,7 +52,7 @@ class CountDown extends React.Component {
   }
 
   componentDidMount() {
-    this.myListener = AppState.addEvenListener('change', this._handleAppStateChange);
+    this.myListener = AppState.addEventListener('change', this._handleAppStateChange);
   }
 
   componentWillUnmount() {
