@@ -48,15 +48,16 @@ class CountDown extends React.Component {
   constructor(props) {
     super(props);
     this.timer = setInterval(this.updateTimer, 1000);
+    this.myListener = null;
   }
 
   componentDidMount() {
-    AppState.addEventListener('change', this._handleAppStateChange);
+    this.myListener = AppState.addEvenListener('change', this._handleAppStateChange);
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
-    AppState.removeEventListener('change', this._handleAppStateChange);
+    this.myListener && this.myListener.remove()
   }
 
   componentDidUpdate(prevProps, prevState) {
