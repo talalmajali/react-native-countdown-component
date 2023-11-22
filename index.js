@@ -104,6 +104,7 @@ class CountDown extends React.Component {
 
     getTimeLeft = () => {
         const { until } = this.state;
+
         return {
             seconds: until % 60,
             minutes: parseInt(until / 60, 10) % 60,
@@ -213,7 +214,6 @@ class CountDown extends React.Component {
 
     renderCountDown = () => {
         const { timeToShow, timeLabels, showSeparator } = this.props;
-        const { until } = this.state;
         const { days, hours, minutes, seconds } = this.getTimeLeft();
         const newTime = sprintf(
             "%02d:%02d:%02d:%02d",
@@ -226,20 +226,23 @@ class CountDown extends React.Component {
 
         return (
             <Component style={styles.timeCont} onPress={this.props.onPress}>
-                {timeToShow.includes("D")
+                {timeToShow.includes("D") && days !== 0
                     ? this.renderDoubleDigits(timeLabels.d, newTime[0])
                     : null}
                 {showSeparator &&
                 timeToShow.includes("D") &&
-                timeToShow.includes("H")
+                timeToShow.includes("H") &&
+                days !== 0
                     ? this.renderSeparator()
                     : null}
-                {timeToShow.includes("H")
+
+                {timeToShow.includes("H") && hours !== 0
                     ? this.renderDoubleDigits(timeLabels.h, newTime[1])
                     : null}
                 {showSeparator &&
                 timeToShow.includes("H") &&
-                timeToShow.includes("M")
+                timeToShow.includes("M") &&
+                hours !== 0
                     ? this.renderSeparator()
                     : null}
                 {timeToShow.includes("M")
