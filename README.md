@@ -7,7 +7,7 @@ Run `npm install react-native-countdown-component --save` OR `yarn add react-nat
 ## Props
 | Name | Description | Type | Default Value |
 | :--- | :----- | :--- | :---: |
-| id | Counter id, to determine whether to reset the counter or not | string | null |
+| id | Counter id, to determine whether to reset the counter or not.  To reset the timer, change this value | string | null |
 | style | Override the component style | object | {} |
 | digitStyle |  Digit style | object | {backgroundColor: ![#FAB913](https://placehold.it/15/FAB913/000000?text=+) `'#FAB913'`} |
 | digitTxtStyle | Digit Text style | object | {color: ![#FAB913](https://placehold.it/15/000000/000000?text=+) `'#000'`} |
