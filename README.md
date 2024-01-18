@@ -88,7 +88,7 @@ render() {
         timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
         separatorStyle={{color: '#1CC625'}}
         timeToShow={['H', 'M', 'S']}
-        timeLabels={{m: null, s: null}}
+        timeLabels={{m: undefined, s: undefined}}
         showSeparator
       />
     )
