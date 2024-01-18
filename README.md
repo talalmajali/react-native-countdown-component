@@ -94,3 +94,22 @@ render() {
     )
 }
 ```
+## Reset Timer
+
+To reset the timer, the `id` property must be changed.  Below is a simple example.
+
+```javascript
+import CountDown from 'react-native-countdown-component';
+
+const [timerId, setTimerId] = useState<string>(Math.random().toString())
+
+const resetTimer = () => {setTimerId(Math.random().toString())}
+
+return (
+    <CountDown
+      id={timerId}
+      until={45 * 60}
+      onPress={resetTimer}
+    />
+)
+```
